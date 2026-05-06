@@ -1,4 +1,4 @@
-# ASKDOC AI — Mini Assistant
+# ASKDOC AI - Mini Assistant
 
 A web application where users can paste any text content and ask questions about it. The AI responds based strictly on the provided content, powered by Llama 3.3 70B via Groq API.
 
