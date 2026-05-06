@@ -15,7 +15,14 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [charCount, setCharCount] = useState(0);
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(() => {
+    try {
+      const saved = localStorage.getItem("askdoc-history");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
   const [phase, setPhase] = useState("idle"); // idle | thinking | done
   const answerRef = useRef(null);
   const apiKey = import.meta.env.VITE_GROQ_API_KEY;
@@ -32,6 +39,10 @@ export default function App() {
       });
     }
   }, [answer]);
+
+  useEffect(() => {
+  localStorage.setItem('askdoc-history', JSON.stringify(history))
+  }, [history])
 
   const loadExample = () => {
     setContent(EXAMPLE_CONTENT);
